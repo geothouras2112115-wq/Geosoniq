@@ -1,0 +1,49 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile and Role",
+      "description": "User account information, assigned role (student, teacher, admin), and notification configuration.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "avatar": { "type": "string" },
+        "role": { "type": "string", "enum": ["student", "teacher", "admin"] },
+        "department": { "type": "string" },
+        "fcmToken": { "type": "string" },
+        "platform": { "type": "string", "enum": ["windows", "android", "web"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "name", "email", "role"]
+    },
+    "Notification": {
+      "title": "Push Notification Dispatch",
+      "description": "FCM push notification message delivered to target devices (Windows / Android / All).",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "body": { "type": "string" },
+        "targetPlatform": { "type": "string", "enum": ["all", "windows", "android"] },
+        "targetRole": { "type": "string", "enum": ["all", "student", "teacher", "admin"] },
+        "senderId": { "type": "string" },
+        "senderName": { "type": "string" },
+        "timestamp": { "type": "string" },
+        "read": { "type": "boolean" }
+      },
+      "required": ["id", "title", "body", "targetPlatform", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Stores user profiles and assigned roles."
+    },
+    "/notifications/{notificationId}": {
+      "schema": "Notification",
+      "description": "Stores push notifications sent via FCM to Windows and Android devices."
+    }
+  }
+}

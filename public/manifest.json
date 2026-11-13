@@ -1,0 +1,16 @@
+{
+  "name": "GeoSoniq — Study Geology With Us",
+  "short_name": "GeoSoniq",
+  "description": "GeoSoniq — Study Geology With Us | Geology & Geophysics Education Platform",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#020617",
+  "icons": [
+    {
+      "src": "/assets/aistudio/image_492a3ed4.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/" xmlns:referrer="http://a9.com/-/spec/opensearch/extensions/referrer/1.0/">
+  <ShortName>GeoSoniq</ShortName>
+  <Description>Search GeoSoniq — Study Geology With Us</Description>
+  <InputEncoding>UTF-8</InputEncoding>
+  <Url type="text/html" template="https://geosoniq.com/?q={searchTerms}"/>
+  <Url type="text/html" template="https://ais-pre-myluqo4svp5aqfmnc56vzm-1015511641903.asia-southeast1.run.app/?q={searchTerms}"/>
+  <Image width="64" height="64" type="image/png">https://ais-pre-myluqo4svp5aqfmnc56vzm-1015511641903.asia-southeast1.run.app/assets/aistudio/image_492a3ed4.png</Image>
+</OpenSearchDescription>

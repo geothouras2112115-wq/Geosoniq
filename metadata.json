@@ -1,0 +1,6 @@
+{
+  "name": "Bhugarv",
+  "description": "Bhugarv Geosolution virtual classroom with live video & voice conferencing, user role management (Student, Teacher, Admin), FCM push notifications, OTP login, and course file vault.",
+  "requestFramePermissions": ["camera", "microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

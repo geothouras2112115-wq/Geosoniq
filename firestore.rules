@@ -1,0 +1,68 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Default deny catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isUser(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function getUserData() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (
+        (exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+         getUserData().role == 'admin') ||
+        request.auth.token.email == 'soniaman7691@gmail.com'
+      );
+    }
+
+    function isTeacherOrAdmin() {
+      return isSignedIn() && (
+        isAdmin() ||
+        (exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+         getUserData().role == 'teacher')
+      );
+    }
+
+    // Users Collection
+    match /users/{userId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn();
+      allow update: if isUser(userId) || isAdmin();
+      allow delete: if isAdmin();
+      // Temporary fix: explicitly allow admin to write to users
+      allow write: if isAdmin();
+    }
+
+    // Notifications Collection
+    match /notifications/{notificationId} {
+      allow read: if isSignedIn();
+      allow create: if isTeacherOrAdmin();
+      allow update: if isSignedIn();
+      allow delete: if isAdmin();
+    }
+
+    // Course & Vault Collections
+    match /courses/{courseId} {
+      allow read: if isSignedIn();
+      allow create, update, delete: if isTeacherOrAdmin();
+    }
+
+    match /vault_files/{fileId} {
+      allow read: if isSignedIn();
+      allow create, update, delete: if isSignedIn();
+    }
+  }
+}
